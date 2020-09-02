@@ -1,11 +1,11 @@
 import nats from "node-nats-streaming"
 
 const stan = nats.connect("ticketing", "abc", {
-  url: "http://localhost:3200",
+  url: "http://localhost:4222",
 })
 
 stan.on("connect", () => {
-  console.log("pub", "connected to nats")
+  console.log('pub connected')
 
   const data = JSON.stringify({
     id: "123",
@@ -14,6 +14,6 @@ stan.on("connect", () => {
   })
 
   stan.publish("ticket:created", data, () => {
-    console.log("pub", "created ticket")
+    console.log('ticket published')
   })
 })
